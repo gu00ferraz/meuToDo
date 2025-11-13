@@ -29,5 +29,30 @@ await sequelize.sync({generate : true,});
 
 })(); */
 
-configDb()
 // configurar o express 
+
+import express from 'express'
+const app = express()
+const port = 3000
+
+
+// GET - CREATE 
+app.get('/', (req, res) => {
+    
+    res.send('Hello World, Gustavo!')
+})
+
+// POST - READ
+
+
+// PUT - UPDATE 
+
+// DELETE - DELETE 
+
+
+
+app.listen(port, () => {
+    console.log(`EXEMPLO RODANDO NA PORTA: ${port}`)
+    configDb()
+
+})
