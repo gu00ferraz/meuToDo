@@ -1,56 +1,71 @@
 
 import {configDb} from "./configdb.js"
-
-/* // abriu o banco e sincronizou com a model 
-(async () => {
-const sequelize = await openConnection()
-initTodo(sequelize)
-// gera a tabela
-await sequelize.sync({generate : true,});
-// force:  true PARA quando iniciar uma nova tabela (jeito nao profissional)
-
-
-/* create
-    const novaTarefa = await Produto.create({
-        nome: "comprar pao "
-    })
-    console.log(novaTarefa)
-
-// read
-    const listas = await Produto.findAll();
-    console.log(listas)
-
-// update
-    Produto.descricao = "fiz uma alteracao";
-    await Produto.save();
-
-// delete
-    await produto.destroy();
-
-})(); */
-
-// configurar o express 
-
 import express from 'express'
+import cors from "cors"
+
 const app = express()
+app.use(cors());
 const port = 3000
 
-
-// GET - CREATE 
+/*
+//   TESTE
 app.get('/', (req, res) => {
     
     res.send('Hello World, Gustavo!')
 })
+*/
 
-// POST - READ
+// CONFIGURANDO O PAI 
 
+// CRIAR TITULO DA TABELA  - POST 
+app.post("/todos", async (req, res) => {
+  const { titulo } = req.body;
+  const novo = await Todo.create({ titulo });
+  res.json(novo);
+});
 
-// PUT - UPDATE 
+// LER TITULO DA TABELA - GET 
+app.get("/todos", async (req, res) => {
+  const lista = await Todo.findAll();
+  res.json(lista);
+}); 
 
-// DELETE - DELETE 
+// CONFIGURANDO O FILHO 
 
+// CRIAR CONTEUDO DA LISTA - POST 
+app.post("/todos", async (req, res) => {
+  const { conteudo } = req.body;
+  const novo = await Todo.create({ conteudo });
+  res.json(novo);
+});
 
+// LER CONTEUDO DA LISTA - GET 
+app.get("/conteudo", async (req, res) => {
+  const lista = await Todo.findAll();
+  res.json(lista);
+}); 
 
+// ATUALIZAR CONTEUDO DA LISTA - PUT 
+app.put("/conteudo/:id", async (req, res) => {
+  const { id } = req.params;
+  const { conteudo} = req.body;
+  const item = await Todo.findByPk(id);
+
+  item.titulo = titulo;
+  item.descricao = descricao;
+
+  await item.save();
+  res.json(item);
+});
+
+// DELETAR LISTA - DELETE 
+app.delete("/conteudo/:id", async (req, res) => {
+  const id = req.params.id;
+  await Todo.destroy({ where: { id } });
+  res.json({ mensagem: "Removido com sucesso!" });
+});
+
+// INICIAR O SERVIDOR 
 app.listen(port, () => {
     console.log(`EXEMPLO RODANDO NA PORTA: ${port}`)
     configDb()

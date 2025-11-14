@@ -1,38 +1,18 @@
 import { Sequelize } from "sequelize";
 
-
+// tabela pai (1)
 export let toDo = null
-function initTodo (sequelize){
+// async
+ function initTodo (sequelize){
  toDo = sequelize.define('todo', {
-       id: {
-           type: Sequelize.INTEGER,
-           autoIncrement: true,
-           allowNull: false,
-           primaryKey: true
-       },
-
        //titulo da lista de tarefas 
        tituloDaLista: {
            type: Sequelize.STRING,
            allowNull: false,
        },
-        // checkbox concluido 
-        estaConcluido: {
-            type: Sequelize.BOOLEAN,
-            defaultValue: false
-        },
-
-
-        // descricao 
-        conteudoDasTarefas: {
-            type: Sequelize.STRING,
-            allowNull: false, 
-        },
-        
-
-
    })
+  //await toDo.create({tituloDaLista: "qualaer", estaConcluido: true, conteudoDasTarefas: "conteudo" })
 
 }
 
-export default  initTodo;
+export default initTodo;
