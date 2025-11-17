@@ -12,15 +12,20 @@ initTodo2(sequelize)
 
 
 // um toDo pode ter muitos meuTodo
-  toDo.hasMany(meuTodo);
+  toDo.hasMany(meuTodo, {
+    foreignKey: "lista_id"
+  });
 
   // cada meuTodo pertence a um toDo
-  meuTodo.belongsTo(toDo);
+  meuTodo.belongsTo(toDo, {
+    foreignKey: "lista_id"
+  });
 
 
 // gera a tabela e sincroniza com o banco 
 await sequelize.sync({alter : true,});
 }
+
 
 
 
