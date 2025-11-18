@@ -17,6 +17,12 @@ function initTodo2 (sequelize){
             type: Sequelize.BOOLEAN,
             allowNull: false,
         },
+        
+        nomeDaLista: {
+            type: Sequelize.STRING,
+            allowNull: false,
+            defaultValue: "default"
+        }
 
     })
 

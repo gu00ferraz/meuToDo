@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { toDo } from "../ToDo.js"
-import { meuTodo } from "../ToDo2.js";
+import { meuTodo } from "../ToDo2.js"
 
 // objeto rotas, onde elas serao registradas
 const rotas = Router();
@@ -34,6 +34,22 @@ rotas.get("/listas", async (req, res) => {
         res.json(listas);
     } catch (error) {
         res.status(500).json({ erro: "Erro ao buscar listas" });
+    }
+});
+// implementar update 
+rotas.put("/listas/:id", async (req, res) => {
+    try {
+        const id = req.params.id;
+        const { tituloDaLista } = req.body;
+        const lista = await toDo.findByPk(id);
+        if (!lista) {
+            return res.status(404).json({ erro: "Lista não encontrada" });
+        }
+        lista.tituloDaLista = tituloDaLista;
+        await lista.save();
+        res.json(lista);
+    } catch (error) {
+        res.status(500).json({ erro: "Erro ao atualizar a lista" });
     }
 });
 
