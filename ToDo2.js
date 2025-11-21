@@ -7,7 +7,7 @@ export let meuTodo = null
 function initTodo2 (sequelize){
     meuTodo = sequelize.define('meuTodo', {
         // descricao 
-        conteudoDasTarefas: {
+        conteudoDaLista: {
             type: Sequelize.STRING,
             allowNull: false, 
         },

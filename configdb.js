@@ -23,7 +23,7 @@ initTodo2(sequelize)
 
 
 // gera a tabela e sincroniza com o banco 
-await sequelize.sync({alter : true,});
+await sequelize.sync({force : true,});
 }
 
 
