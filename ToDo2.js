@@ -7,7 +7,7 @@ export let meuTodo = null
 function initTodo2 (sequelize){
     meuTodo = sequelize.define('meuTodo', {
         // descricao 
-        conteudoDaLista: {
+        conteudoDasTarefas: {
             type: Sequelize.STRING,
             allowNull: false, 
         },
@@ -21,7 +21,7 @@ function initTodo2 (sequelize){
         nomeDaLista: {
             type: Sequelize.STRING,
             allowNull: false,
-            defaultValue: "default"
+            defaultValue: "default value esta errado"
         }
 
     })
